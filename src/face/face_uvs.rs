@@ -29,10 +29,13 @@ pub fn new(
         .map(|face_id| {
             let face_texture = &face_textures[face_id];
             let texture_size = texture_sizes.get(face_texture).copied().unwrap_or_else(|| {
-                println!(
-                    "Warning: Texture {} not found, generating UV with default size of 256x256",
-                    &textures[face_texture],
-                );
+                let texture_name = &textures[face_texture];
+                if !texture_name.contains("TB_empty") {
+                    println!(
+                        "Warning: Texture {} not found, generating UV with default size of 256x256",
+                        texture_name,
+                    );
+                }
                 (256, 256)
             });
             let face_vertices = &face_vertices[face_id];
