@@ -1,3 +1,4 @@
+use super::{FaceId, FacePlanes, FaceVertices};
 use crate::{
     texture::{TextureId, TextureSizes},
     Plane3d, Vector2, Vector3,
@@ -5,9 +6,8 @@ use crate::{
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 use shalrath::repr::{TextureOffset, TexturePlane};
 use std::collections::BTreeMap;
+use tracing::warn;
 use usage::Usage;
-
-use super::{FaceId, FacePlanes, FaceVertices};
 
 pub enum FaceUvsTag {}
 
@@ -31,9 +31,9 @@ pub fn new(
             let texture_size = texture_sizes.get(face_texture).copied().unwrap_or_else(|| {
                 let texture_name = &textures[face_texture];
                 if !texture_name.contains("TB_empty") {
-                    println!(
-                        "Warning: Texture {} not found, generating UV with default size of 256x256",
-                        texture_name,
+                    warn!(
+                        "Texture {} not found, generating UV with default size of 256x256",
+                        texture_name
                     );
                 }
                 (256, 256)
