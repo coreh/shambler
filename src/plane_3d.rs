@@ -4,7 +4,7 @@ use shalrath::repr::{TexturePlane, TrianglePlane};
 #[derive(Debug, Default, Copy, Clone, PartialEq, PartialOrd)]
 pub struct Plane3d {
     pub n: Vector3,
-    pub d: f32,
+    pub d: f64,
 }
 
 impl Plane3d {
@@ -12,7 +12,7 @@ impl Plane3d {
         &self.n
     }
 
-    pub fn distance(&self) -> f32 {
+    pub fn distance(&self) -> f64 {
         self.d
     }
 
@@ -56,8 +56,8 @@ impl From<&TrianglePlane> for Plane3d {
 
 impl From<&TexturePlane> for Plane3d {
     fn from(p: &TexturePlane) -> Self {
-        let n = nalgebra::vector![p.x, p.y, p.z];
-        let d = p.d;
+        let n = nalgebra::vector![p.x as f64, p.y as f64, p.z as f64];
+        let d = p.d as f64;
         Plane3d { n, d }
     }
 }

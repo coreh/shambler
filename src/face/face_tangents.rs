@@ -24,7 +24,7 @@ pub fn face_bases(
     planes: &Vec<FaceId>,
     geo_planes: &FacePlanes,
     face_offsets: &BTreeMap<FaceId, TextureOffset>,
-    face_angles: &BTreeMap<FaceId, f32>,
+    face_angles: &BTreeMap<FaceId, f64>,
     face_scales: &BTreeMap<FaceId, Vector2>,
 ) -> FaceBases {
     planes
@@ -43,14 +43,14 @@ pub fn face_bases(
         .collect()
 }
 
-fn face_basis(geo_plane: &Plane3d, offset: &TextureOffset, angle: f32, scale: Vector2) -> Basis {
+fn face_basis(geo_plane: &Plane3d, offset: &TextureOffset, angle: f64, scale: Vector2) -> Basis {
     match &offset {
         shalrath::repr::TextureOffset::Standard { .. } => standard_basis(geo_plane, angle, scale),
         shalrath::repr::TextureOffset::Valve { .. } => valve_basis(geo_plane, offset),
     }
 }
 
-fn standard_basis(plane: &Plane3d, angle: f32, scale: Vector2) -> Basis {
+fn standard_basis(plane: &Plane3d, angle: f64, scale: Vector2) -> Basis {
     let up_vector: &Vector3 = &Vector3::z_axis();
     let right_vector: &Vector3 = &Vector3::y_axis();
     let forward_vector: &Vector3 = &Vector3::x_axis();

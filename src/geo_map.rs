@@ -36,7 +36,7 @@ pub type BrushFaces = Usage<BrushFacesTag, BTreeMap<BrushId, Vec<FaceId>>>;
 pub type FaceTrianglePlanes = Usage<FaceTrianglePlanesTag, BTreeMap<FaceId, TrianglePlane>>;
 pub type FaceTextures = Usage<FaceTexturesTag, BTreeMap<FaceId, TextureId>>;
 pub type FaceOffsets = Usage<FaceOffsetsTag, BTreeMap<FaceId, TextureOffset>>;
-pub type FaceAngles = Usage<FaceAnglesTag, BTreeMap<FaceId, f32>>;
+pub type FaceAngles = Usage<FaceAnglesTag, BTreeMap<FaceId, f64>>;
 pub type FaceScales = Usage<FaceScalesTag, BTreeMap<FaceId, Vector2>>;
 pub type FaceExtensions = Usage<FaceExtensionsTag, BTreeMap<FaceId, Extension>>;
 
@@ -136,8 +136,8 @@ impl GeoMap {
                     face_textures.insert(plane_id, texture_id);
 
                     face_offsets.insert(plane_id, texture_offset);
-                    face_angles.insert(plane_id, angle);
-                    face_scales.insert(plane_id, nalgebra::vector![scale_x, scale_y]);
+                    face_angles.insert(plane_id, angle as f64);
+                    face_scales.insert(plane_id, nalgebra::vector![scale_x as f64, scale_y as f64]);
                     face_extensions.insert(plane_id, extension);
                     brush_faces.entry(brush_id).or_default().push(plane_id);
                 }

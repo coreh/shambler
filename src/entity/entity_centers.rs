@@ -26,7 +26,7 @@ pub fn entity_centers(
                 .map(|brush_id| brush_centers[brush_id])
                 .sum();
 
-            let center = center / brush_ids.len() as f32;
+            let center = center / brush_ids.len() as f64;
 
             (*entity_id, center)
         })

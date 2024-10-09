@@ -20,7 +20,7 @@ pub fn new(
     face_vertices: &FaceVertices,
     face_planes: &FacePlanes,
     face_texture_offsets: &BTreeMap<FaceId, TextureOffset>,
-    face_texture_rotations: &BTreeMap<FaceId, f32>,
+    face_texture_rotations: &BTreeMap<FaceId, f64>,
     face_texture_scales: &BTreeMap<FaceId, Vector2>,
     texture_sizes: &TextureSizes,
 ) -> FaceUvs {
@@ -55,7 +55,7 @@ pub fn new(
                             face_texture_offset,
                             face_texture_rotation,
                             face_texture_scale,
-                            nalgebra::vector![texture_size.0 as f32, texture_size.1 as f32],
+                            nalgebra::vector![texture_size.0 as f64, texture_size.1 as f64],
                         )
                     })
                     .collect(),
@@ -68,7 +68,7 @@ pub fn vertex_uv(
     vertex: Vector3,
     plane: Plane3d,
     texture_offset: TextureOffset,
-    texture_rotation: f32,
+    texture_rotation: f64,
     texture_scale: Vector2,
     texture_size: Vector2,
 ) -> Vector2 {
@@ -76,8 +76,8 @@ pub fn vertex_uv(
         TextureOffset::Standard { u, v } => standard_uv(
             vertex,
             plane,
-            u,
-            v,
+            u as f64,
+            v as f64,
             texture_rotation,
             texture_scale,
             texture_size,
@@ -89,9 +89,9 @@ pub fn vertex_uv(
 pub fn standard_uv(
     vertex: Vector3,
     brush_plane: Plane3d,
-    u_offset: f32,
-    v_offset: f32,
-    texture_rotation: f32,
+    u_offset: f64,
+    v_offset: f64,
+    texture_rotation: f64,
     texture_scale: Vector2,
     texture_size: Vector2,
 ) -> Vector2 {
@@ -137,8 +137,8 @@ pub fn valve_uv(
     texture_scale: Vector2,
     texture_size: Vector2,
 ) -> Vector2 {
-    let un = nalgebra::vector![u_plane.x, u_plane.y, u_plane.z];
-    let vn = nalgebra::vector![v_plane.x, v_plane.y, v_plane.z];
+    let un = nalgebra::vector![u_plane.x as f64, u_plane.y as f64, u_plane.z as f64];
+    let vn = nalgebra::vector![v_plane.x as f64, v_plane.y as f64, v_plane.z as f64];
 
     let mut uv = nalgebra::vector![un.dot(&vertex), vn.dot(&vertex)];
     uv.x /= texture_size.x;
@@ -146,7 +146,7 @@ pub fn valve_uv(
     uv.x /= texture_scale.x;
     uv.y /= texture_scale.y;
 
-    let uv = uv + nalgebra::vector![u_plane.d / texture_size.x, v_plane.d / texture_size.y];
+    let uv = uv + nalgebra::vector![u_plane.d as f64 / texture_size.x, v_plane.d as f64 / texture_size.y];
 
     uv
 }

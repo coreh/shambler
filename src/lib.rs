@@ -21,15 +21,15 @@ use shalrath::repr::{Point, TexturePlane};
 
 use crate::face::FacePlanes;
 
-const EPSILON: f32 = 0.001;
+const EPSILON: f64 = 0.001;
 
-pub type Vector2 = nalgebra::Vector2<f32>;
-pub type Vector3 = nalgebra::Vector3<f32>;
+pub type Vector2 = nalgebra::Vector2<f64>;
+pub type Vector3 = nalgebra::Vector3<f64>;
 
 pub fn vector3_from_point(point: Point) -> Vector3 {
-    nalgebra::vector![point.x, point.y, point.z]
+    nalgebra::vector![point.x as f64, point.y as f64, point.z as f64]
 }
 
 pub fn vector3_from_texture_plane(plane: &TexturePlane) -> Vector3 {
-    nalgebra::vector![plane.x, plane.y, plane.z]
+    nalgebra::vector![plane.x as f64, plane.y as f64, plane.z as f64]
 }

@@ -19,7 +19,7 @@ pub fn face_centers(face_vertices: &FaceVertices) -> FaceCenters {
             for world_vertex in vertices {
                 center += world_vertex;
             }
-            center /= vertices.len() as f32;
+            center /= vertices.len() as f64;
             (*face_id, center)
         })
         .collect()

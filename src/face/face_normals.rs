@@ -57,7 +57,7 @@ pub fn normals_phong_averaged(
 pub fn normals_phong_threshold(
     face_vertex_planes: &FaceVertexPlanes,
     face_planes: &FacePlanes,
-    threshold: f32,
+    threshold: f64,
 ) -> FaceNormals {
     face_vertex_planes
         .par_iter()
@@ -71,7 +71,7 @@ pub fn normals_phong_threshold(
                         let p1 = &face_planes[p1];
                         let p2 = &face_planes[p2];
 
-                        const ONE_DEGREE: f32 = 0.017_453_3;
+                        const ONE_DEGREE: f64 = 0.017_453_3;
 
                         let threshold = ((threshold + 0.01) * ONE_DEGREE).cos();
                         let mut normal = *p0.normal();

@@ -23,7 +23,7 @@ pub fn brush_centers(brush_planes: &BTreeMap<BrushId, Vec<FaceId>>, face_centers
             for plane_id in plane_ids {
                 center += face_centers[plane_id];
             }
-            center /= plane_ids.len() as f32;
+            center /= plane_ids.len() as f64;
 
             (*brush_id, center)
         })
