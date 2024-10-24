@@ -6,7 +6,7 @@ use usage::Usage;
 use crate::{
     brush::{BrushHulls, BrushId},
     face::FaceId,
-    ConvexHull, FacePlanes, Plane3d, Vector3, EPSILON,
+    FacePlanes, Plane3d, Vector3, EPSILON,
 };
 
 pub enum FaceVerticesTag {}

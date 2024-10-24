@@ -50,7 +50,7 @@ fn face_basis(geo_plane: &Plane3d, offset: &TextureOffset, angle: f64, scale: Ve
     }
 }
 
-fn standard_basis(plane: &Plane3d, angle: f64, scale: Vector2) -> Basis {
+fn standard_basis(plane: &Plane3d, angle: f64, _scale: Vector2) -> Basis {
     let up_vector: &Vector3 = &Vector3::z_axis();
     let right_vector: &Vector3 = &Vector3::y_axis();
     let forward_vector: &Vector3 = &Vector3::x_axis();
@@ -69,7 +69,7 @@ fn standard_basis(plane: &Plane3d, angle: f64, scale: Vector2) -> Basis {
     let dr_sign = dr.signum();
     let df_sign = df.signum();
 
-    let quat = nalgebra::UnitQuaternion::new(normal * -angle.to_radians());
+    let _quat = nalgebra::UnitQuaternion::new(normal * -angle.to_radians());
     if du_abs >= dr_abs && du_abs >= df_abs {
         let z = *plane.normal() * du_sign;
         let x = z.cross(forward_vector).normalize();
